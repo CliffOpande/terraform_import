@@ -12,11 +12,11 @@ variable "key_pair" {
 }
 variable "security_group" {
   type        = set(string)
-  default     = ["dev"]
+  default     = ["sg-0158ac2f66e458159"]
 }
 variable "subnet_id" {
   type        = string
-  default     = "pipeline_public_subnet"
+  default     = "subnet-071b0ceeae26ca168"
 }
 
 variable "vpc_id" {
@@ -29,7 +29,7 @@ variable "internet_gateway_id" {
 }
 variable "route_table_id" {
   type        = string
-  default     = "pipeline_route_table"
+  default     = "rtb-08171bddd887fd24b"
 }
 variable "aws_region" {
   type        = string

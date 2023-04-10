@@ -1,3 +1,15 @@
+resource "aws_subnet" "pipeline_public_subnet" {
+  vpc_id     = var.vpc_id
+  cidr_block = "172.31.0.0/24"
+
+  tags = {
+    Name = "pipeline_public_subnet"
+    project   = "pipeline"
+    environment = "dev"
+    owner = "Cliff_Philip"
+  }
+}
+
 resource "aws_instance"  "instance-Jenkins" {
   ami                    = var.ami
   instance_type          = var.instance_type
@@ -7,7 +19,7 @@ resource "aws_instance"  "instance-Jenkins" {
   subnet_id              = var.subnet_id
 
   tags = {
-    name = "instance-Jenkins"
+    Name = "instance-Jenkins"
     project   = "pipeline"
     environment = "dev"
     owner = "Cliff_Philip"
@@ -23,14 +35,14 @@ resource "aws_instance"  "instance-Nexus" {
   subnet_id              = var.subnet_id
 
   tags = {
-    name = "instance-Nexus"
+    Name = "instance-Nexus"
     project   = "pipeline"
     environment = "dev"
     owner = "Cliff_Philip"
   }
 }
-resource "aws_security_group" "launch-wizard-1" {
-  name        = "launch-wizard-1"
+resource "aws_security_group" "dev-sg" {
+  name        = "dev-sg"
   description = "launch-wizard-1 created 2023-03-15T20:59:40.748Z"
   vpc_id      = var.vpc_id
 
@@ -57,18 +69,7 @@ resource "aws_security_group" "launch-wizard-1" {
   }
 
   tags = {
-    name = "dev-sg"
-    project   = "pipeline"
-    environment = "dev"
-    owner = "Cliff_Philip"
-  }
-}
-resource "aws_subnet" "pipeline_public_subnet" {
-  vpc_id     = var.vpc_id
-  cidr_block = "10.0.1.0/24"
-
-  tags = {
-    name = "dev-public-subnet"
+    Name = "dev-sg"
     project   = "pipeline"
     environment = "dev"
     owner = "Cliff_Philip"
@@ -79,7 +80,7 @@ resource "aws_route_table" "pipeline_route_table" {
 
 
   tags = {
-    name = "pipeline-route-table"
+    Name = "pipeline-route-table"
     project   = "pipeline"
     environment = "dev"
     owner = "Cliff_Philip"
