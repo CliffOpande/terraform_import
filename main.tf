@@ -45,7 +45,6 @@ resource "aws_instance"  "instance-Nexus" {
 }
 resource "aws_security_group" "dev-sg" {
   name        = "dev-sg"
-  description = "launch-wizard-1 created 2023-03-15T20:59:40.748Z"
   vpc_id      = var.vpc_id
 
   ingress {
