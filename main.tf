@@ -15,6 +15,7 @@ resource "aws_instance"  "instance-Jenkins" {
   instance_type          = var.instance_type
   key_name               = var.key_pair
   monitoring             = true
+  associate_public_ip_address = true
   vpc_security_group_ids = var.security_group
   subnet_id              = var.subnet_id
 
@@ -31,6 +32,7 @@ resource "aws_instance"  "instance-Nexus" {
   instance_type          = var.instance_type
   key_name               = var.key_pair
   monitoring             = true
+  associate_public_ip_address = true
   vpc_security_group_ids = var.security_group
   subnet_id              = var.subnet_id
 
@@ -65,7 +67,6 @@ resource "aws_security_group" "dev-sg" {
     to_port          = 0
     protocol         = "-1"
     cidr_blocks      = ["0.0.0.0/0"]
-    ipv6_cidr_blocks = ["::/0"]
   }
 
   tags = {
@@ -78,7 +79,12 @@ resource "aws_security_group" "dev-sg" {
 resource "aws_route_table" "pipeline_route_table" {
   vpc_id = var.vpc_id
 
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = var.internet_gateway_id
 
+
+  }
   tags = {
     Name = "pipeline-route-table"
     project   = "pipeline"
