@@ -25,7 +25,7 @@ variable "vpc_id" {
 }
 variable "internet_gateway_id" {
   type        = string
-  default     = "pipeline-internet-gateway"
+  default     = "igw-0aea41ccc7f975aeb"
 }
 variable "route_table_id" {
   type        = string
