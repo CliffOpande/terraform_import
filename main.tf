@@ -84,7 +84,7 @@ resource "aws_route_table" "pipeline_route_table" {
 
 
   }
-  }
+  
   tags = {
     Name = "pipeline-route-table"
     project   = "pipeline"
