@@ -10,13 +10,14 @@ variable "key_pair" {
   type        = string
   default     = "aswsdemo"
 }
-variable "security_group" {
+variable "security_group_id" {
   type        = set(string)
-  default     = ["sg-0158ac2f66e458159"]
+  default     = []
 }
+
 variable "subnet_id" {
   type        = string
-  default     = "subnet-071b0ceeae26ca168"
+  default     = ""
 }
 
 variable "vpc_id" {
@@ -25,12 +26,14 @@ variable "vpc_id" {
 }
 variable "internet_gateway_id" {
   type        = string
-  default     = "igw-0aea41ccc7f975aeb"
+  default     = ""
 }
+
 variable "route_table_id" {
   type        = string
-  default     = "rtb-08171bddd887fd24b"
+  default     = "rtb-0e1a54e7d55e55daa"
 }
+
 variable "aws_region" {
   type        = string
   default     = "us-east-1"
