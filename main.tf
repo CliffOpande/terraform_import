@@ -10,34 +10,34 @@ resource "aws_subnet" "pipeline_public_subnet" {
   }
 }
 
-resource "aws_instance"  "instance-Jenkins" {
+resource "aws_instance"  "jenkins" {
   ami                    = var.ami
   instance_type          = var.instance_type
   key_name               = var.key_pair
   monitoring             = true
   associate_public_ip_address = true
-  vpc_security_group_ids = var.security_group
+  vpc_security_group_ids = var.security_group_id 
   subnet_id              = var.subnet_id
 
   tags = {
-    Name = "instance-Jenkins"
+    Name = "jenkins"
     project   = "pipeline"
     environment = "dev"
     owner = "Cliff_Philip"
   }
 }
-resource "aws_instance"  "instance-Nexus" {
+resource "aws_instance"  "nexus" {
 
   ami                    = var.ami
   instance_type          = var.instance_type
   key_name               = var.key_pair
   monitoring             = true
   associate_public_ip_address = true
-  vpc_security_group_ids = var.security_group
+  vpc_security_group_ids = var.security_group_id 
   subnet_id              = var.subnet_id
 
   tags = {
-    Name = "instance-Nexus"
+    Name = "nexus"
     project   = "pipeline"
     environment = "dev"
     owner = "Cliff_Philip"
@@ -80,9 +80,10 @@ resource "aws_route_table" "pipeline_route_table" {
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = var.internet_gateway_id
+    gateway_id = var.internet_gateway_id     
 
 
+  }
   }
   tags = {
     Name = "pipeline-route-table"
@@ -93,8 +94,8 @@ resource "aws_route_table" "pipeline_route_table" {
 }
 
 resource "aws_route_table_association" "pipeline_rt_subnet_association" {
-  subnet_id      = var.subnet_id
-  route_table_id = var.route_table_id
+  subnet_id      = var.subnet_id 
+  route_table_id = var.route_table_id 
 }
 
 resource "aws_internet_gateway" "pipeline_internet_gateway" {
